@@ -7,7 +7,7 @@
         <!-- ============================================================== -->
         <div class="dashboard-header">
             <nav class="navbar navbar-expand-lg bg-white fixed-top">
-                <a class="navbar-brand" href="index.html">Concept</a>
+                <a class="navbar-brand" href="index.html">ez-eye</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -144,7 +144,11 @@
                                                     @php $id =1; @endphp
                                                     @if($tickets->isNotEmpty())
                                                         @foreach($tickets as $ticket)
-                                                            <tr onclick="window.location.href='item.html';">
+                                                            <tr onclick="event.preventDefault();
+                                                     document.getElementById('edit-form').submit();">
+                                                     <form id="edit-form" action="{{ route('ticket.edit', $ticket->id) }}" method="GET" style="display: none;">
+                                                    
+                                                    </form>
                                                                      <td>{{$id}}</td>
                                                                     <td>
                                                                         
@@ -194,8 +198,8 @@
             <div class="footer">
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
-                            Copyright © 2018 Concept. All rights reserved. Dashboard by <a href="https://colorlib.com/wp/">Colorlib</a>.
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                            Copyright © 2019 ez-eye. All rights reserved to Umm al Qura university CIS College.
                         </div>
 
                     </div>

@@ -7,7 +7,7 @@
         <!-- ============================================================== -->
         <div class="dashboard-header">
             <nav class="navbar navbar-expand-lg bg-white fixed-top">
-                <a class="navbar-brand" href="index.html">Concept</a>
+                <a class="navbar-brand" href="index.html">ez-eye</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -97,14 +97,14 @@
                     <div class="row">
                         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                             <div class="page-header">
-                                <h2 class="pageheader-title">Recent Tickets </h2>
+                                <h2 class="pageheader-title">{{$title}} </h2>
                                 <p class="pageheader-text">Nulla euismod urna eros, sit amet scelerisque torton lectus
                                     vel mauris facilisis faucibus at enim quis massa lobortis rutrum.</p>
                                 <div class="page-breadcrumb">
                                     <nav aria-label="breadcrumb">
                                         <ol class="breadcrumb">
                                             <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Dashboard</a></li>
-                                            <li class="breadcrumb-item active" aria-current="page">Recent Tickets</li>
+                                            <li class="breadcrumb-item active" aria-current="page">{{$title}}</li>
                                         </ol>
                                     </nav>
                                 </div>
@@ -125,7 +125,7 @@
                             <!-- ============================================================== -->
                             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                                 <div class="card">
-                                    <h5 class="card-header">Recent Tickets
+                                    <h5 class="card-header">{{$title}}
                                     </h5>
                                     <div class="card-body p-0">
                                         <div class="table-responsive">
@@ -135,6 +135,7 @@
                                                         <th class="border-0">#</th>
                                                         <th class="border-0">Image</th>
                                                         <th class="border-0">Time</th>
+                                                        <th class="border-0">license plate</th>
                                                         <th class="border-0">Longiude</th>
                                                         <th class="border-0">Latitude</th>
                                                         <th class="border-0">Status</th>
@@ -144,7 +145,7 @@
                                                     
                                                     @if($tickets->isNotEmpty())
                                                         @foreach($tickets as $ticket)
-                                                            <tr onclick="window.location.href='item.html';">
+                                                            <tr>
                                                                      <td>{{$ticket->id}}</td>
                                                                     <td>
                                                                         
@@ -152,6 +153,7 @@
                                                                                 alt="user" class="rounded" width="45"></div>
                                                                     </td>
                                                                     <td>{{$ticket->created_at}} </td>
+                                                                    @if($ticket->Status == "Approved")<td>{{$ticket->License_plate}} </td>@else <td> </td> @endif
                                                                     <td>{{$ticket->Lang}}</td>
                                                                     <td>{{$ticket->Lat}}</td>
                                                                     <td>
@@ -194,8 +196,8 @@
             <div class="footer">
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
-                            Copyright © 2018 Concept. All rights reserved. Dashboard by <a href="https://colorlib.com/wp/">Colorlib</a>.
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                            Copyright © 2019 ez-eye. All rights reserved to Umm al Qura university CIS College.
                         </div>
 
                     </div>

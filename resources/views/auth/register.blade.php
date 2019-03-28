@@ -7,7 +7,7 @@
     <!-- ============================================================== -->
     <div class="splash-container">
         <div class="card ">
-            <div class="card-header text-center"><a href="{{ url('/home') }}"><img class="logo-img" src="{{ asset('assets/images/logo.png') }} " alt="logo"></a><span class="splash-description">Register</span></div>
+            <div class="card-header text-center"><a href="{{ url('/home') }}">ez-eye</a><span class="splash-description">Register</span></div>
             <div class="card-body">
                 <form method="POST" action="{{ route('register') }}">
                         {{ csrf_field() }}

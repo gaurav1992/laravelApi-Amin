@@ -19,6 +19,7 @@ class TicketController extends Controller
     public function index()
     {
         //
+      
         $ticket = Ticket::all();
         $success['ticket'] =  $ticket;
         return response()->json(['success'=>$success], $this->successStatus);
@@ -33,7 +34,8 @@ class TicketController extends Controller
     public function store(Request $request)
     {
         
-          
+        
+        
         $validator = Validator::make($request->all(), [ 
             'image' => 'required', 
             'lat' => 'required', 
@@ -45,6 +47,7 @@ class TicketController extends Controller
             return response()->json(['error'=>$validator->errors()], 401);            
         }
         //
+
         $ticket = new Ticket;
 
         $ticket->image = $request->image;
@@ -79,7 +82,7 @@ class TicketController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
+       
         $validator = Validator::make($request->all(), [ 
             'image' => 'required', 
             'lat' => 'required', 
@@ -113,7 +116,10 @@ class TicketController extends Controller
     public function destroy($id)
     {
         //
-        echo "delete";exit;
+        
+        $ticket = Ticket::find($id);
+        $ticket->delete();
+        return response()->json(['success' => $ticket->id.' deleted'], $this->successStatus);
     }
     public function Imageupload(Request $request){
         $validator = Validator::make($request->all(), [ 

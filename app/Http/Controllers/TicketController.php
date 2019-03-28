@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Ticket;
 use Illuminate\Http\Request;
-
+use config;
+use DB;
 class TicketController extends Controller
 {
     /**
@@ -14,9 +15,10 @@ class TicketController extends Controller
      */
     public function index()
     {
-        //
+        config(['app.name' => 'All tickets']);
         $tickets = Ticket::all();
-        return view('ticket', compact('tickets'));
+        $title = "All tickets";
+        return view('ticket', compact('tickets','title'));
     }
 
     /**
@@ -60,6 +62,10 @@ class TicketController extends Controller
     public function edit(Ticket $ticket)
     {
         //
+        config(['app.name' => 'Edit tickets']);
+        
+        
+        return view('editTicket', compact('ticket'));
     }
 
     /**
@@ -72,6 +78,18 @@ class TicketController extends Controller
     public function update(Request $request, Ticket $ticket)
     {
         //
+        
+        if($request->status != ''){
+            $ticket->exists = true;
+            $ticket->status = $request->status;
+            $ticket->License_plate= $request->lcnsplt ? $request->lcnsplt : "";
+            $ticket->save();
+            $Response = array(
+                'code'=> "100",
+                'status'=>"success",
+            );
+            return json_encode($Response);
+        }
     }
 
     /**
@@ -83,5 +101,9 @@ class TicketController extends Controller
     public function destroy(Ticket $ticket)
     {
         //
+    }
+    public function latLngMap(Request $request){
+        $tickets = DB::table('tickets')->select('Lang', 'Lat')->get();
+        return json_encode($tickets);
     }
 }

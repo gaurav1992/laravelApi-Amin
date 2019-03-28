@@ -15,7 +15,7 @@
     <link rel="stylesheet" href=" {{ asset('assets/vendor/fonts/material-design-iconic-font/css/materialdesignicons.min.css') }} ">
     <link rel="stylesheet" href=" {{ asset('assets/vendor/charts/c3charts/c3.css') }} ">
     <link rel="stylesheet" href="{{ asset('assets/vendor/fonts/flag-icon-css/flag-icon.min.css') }} ">
-    <title>Concept - Bootstrap 4 Admin Dashboard Template</title>
+    <title>{{ config('app.name', 'ez-eye') }}</title>
 </head>
 
 <body>
@@ -45,20 +45,62 @@
 
 
 
-
-
-
-
-
-
-
     <script src="{{ asset('assets/vendor/charts/chartist-bundle/Chartistjs.js') }}"></script>
  
 
     <script src="{{ asset('assets/libs/js/gmaps.min.js') }}"></script>
-    <script src="{{ asset('assets/libs/js/google_map.js') }}">
-    </script>
-    <script src="https://maps.google.com/maps/api/js?key=AIzaSyBUb3jDWJQ28vDJhuQZxkC0NXr_zycm8D0&amp;sensor=true"></script>
+  
+    <script async defer src="https://maps.google.com/maps/api/js?key=AIzaSyBP7h0ZF0_biBh5FCB9qH44dhLqWg9PWDI&amp;sensor=true&libraries=visualization&callback=init"></script>
+    <script>
+     var map, heatmap;
+     var array = [];
+
+    function init() {
+
+    getPoints();
+    initMap(37.775, -122.434, 13);
+
+      
+    }
+    function initMap(lat, lng, zoom){
+         map = new google.maps.Map(document.getElementById('map'), {
+            zoom: zoom,
+            center: {lat: 37.775, lng: -122.434},
+            mapTypeId: 'satellite'
+          });
+    }
+
+
+
+    // Heatmap data: 500 Points
+    function getPoints() {
+        $.ajax({
+          url: '/latLngMap',
+          type: 'GET',
+          data: null,
+          dataType: 'json',
+          success: mapData=>{
+            console.log(mapData);
+            mapData.forEach(m=>{
+              let lat = m.Lat;
+              let lon = m.Lang;
+              createMarker(lat, lon);
+            });
+            makeHeat();
+          }
+        });
+
+    }
+    function createMarker(lat, lng){
+        let latLng = {location: new google.maps.LatLng(lat, lng), weight: 5};
+        array.push(latLng);
+    }
+
+    function makeHeat(){
+        new google.maps.visualization.HeatmapLayer({map:map, data: array, maxIntensity: 5, opacity: 0.3, radius: 15});
+    }
+
+</script>
 </body>
 
 </html>
