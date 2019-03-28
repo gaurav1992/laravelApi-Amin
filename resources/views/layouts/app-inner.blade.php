@@ -50,7 +50,7 @@
 
     <script src="{{ asset('assets/libs/js/gmaps.min.js') }}"></script>
   
-    <script async defer src="https://maps.google.com/maps/api/js?key=AIzaSyBP7h0ZF0_biBh5FCB9qH44dhLqWg9PWDI&amp;sensor=true&libraries=visualization&callback=init"></script>
+    <script async defer src="https://maps.google.com/maps/api/js?key=&amp;sensor=true&libraries=visualization&callback=init"></script>
     <script>
      var map, heatmap;
      var array = [];
